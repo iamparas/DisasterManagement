@@ -32,12 +32,24 @@ class CreateUser(Resource):
 
     def get(self):
         try:
-            with engine.connect() as con:
-                values = session.query(Disaster).from_statement(text("SELECT * FROM Disaster")).all()
-                return jsonify(DisasterList = [i.serialize for i in values])
+            values = session.query(Disaster).from_statement(text("SELECT * FROM Disaster")).all()
+            return jsonify(DisasterList = [i.serialize for i in values])
         except Exception as e:
             return {'error' : str(e)}
-api.add_resource(CreateUser, '/CreateUser')
+
+class DisasterEvent(Resource):
+    def get(self):
+        try:
+            vals = session.query(DisasterEvent).from_statement(text("""
+                                                                    SELECT id, title, status, description FROM DisasterEvent""")).all()
+            return jsonify(event_list = [i.serialize for i in vals])
+        except Exception as e:
+            return {'error' : str(e)}
+
+
+
+api.add_resource(CreateUser, '/api/v1/disaster')
+api.add_resource(DisasterEvent, '/api/v1/disaster_event')
 
 if __name__ =='__main__':
     app.run(host="127.0.0.1", port=8010, debug=True)

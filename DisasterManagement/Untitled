@@ -1,0 +1,19 @@
+$banana
+a$banan
+na$bana
+ana$ban
+nana$ba
+anana$b
+banana$
+
+3. Sort the cyclic shifts
+
+$banana
+a$banan
+ana$ban
+anana$b
+banana$
+na$bana
+nana$ba
+
+4. The Burrows-Wheeler output is the last column. output=“annb$aa”
